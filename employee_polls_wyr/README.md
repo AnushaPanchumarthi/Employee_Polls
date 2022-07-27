@@ -1,7 +1,7 @@
 # Employee Polls
 Employee Polls is a React app allows users to create, answer, and track poll questions. Stats are shared through the leaderboard, using the number of polls answered and created as the main metrics.
 
-<img src="./srcimages/WYR.png" />
+<img src="./src/images/WYR.png" />
 
 ### 🕹 Project Features
 
