@@ -9,7 +9,6 @@ export function setAuthedUser(id) {
 }
 
 export function resetAuthedUSer() {
-  console.log('INSIDE reset USERS');
   return {
     type: RESET_AUTHED_USER,
     id: null
