@@ -17,7 +17,6 @@ const App = (props) => {
   }, []);
 
   const { authedUser } = props;
-  console.log('IAM HERE IN APP', authedUser);
 
   return (
     <Fragment>
