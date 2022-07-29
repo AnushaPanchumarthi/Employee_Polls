@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-function notFound() {
+function NotFound() {
   return (
     <section className="py-5 h-100">
       <div className="container h-100 d-flex flex-column align-items-center justify-content-center">
@@ -21,4 +21,4 @@ function notFound() {
   );
 }
 
-export default notFound;
+export default NotFound;

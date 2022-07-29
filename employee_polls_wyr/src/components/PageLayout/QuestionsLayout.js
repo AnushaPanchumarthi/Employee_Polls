@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import QuestionPage from './QuestionPage';
+import PollPageView from './PollPageView';
+//import QuestionPage from './QuestionPage';
 
 const QuestionsLayout = (props) => {
   const answered = props.answered;
@@ -48,7 +49,7 @@ const QuestionsLayout = (props) => {
             </p>
           )}
           {unAnswered.map((q) => (
-            <QuestionPage key={q} questionId={q} type="unanswered" />
+            <PollPageView key={q} questionId={q} type="unanswered" />
           ))}
         </div>
         <div
@@ -58,7 +59,7 @@ const QuestionsLayout = (props) => {
         >
           {answered.length === 0 && <p>There are no Answered questions</p>}
           {answered.map((q) => (
-            <QuestionPage key={q} questionId={q} type="answered" />
+            <PollPageView key={q} questionId={q} type="answered" />
           ))}
         </div>
       </div>

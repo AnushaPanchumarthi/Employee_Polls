@@ -10,14 +10,14 @@ const withRouter = (Component) => {
 };
 
 const PollDetail = (props) => {
+  console.log('POLL DETAIL PROPS..',props);
   return (
     <section className="py-5">
       <div className="container mt-4">
         <h3>Answer Poll</h3>
         <hr />
         <p className="mt-3">
-          Help your friends by answering poll questions and move up in the
-          leaderboard!
+          Polls are a great way to gather opinions
         </p>
         <div className="mt-4">
           <PollAnswerLayout questionId={props.match.params.question_id} />

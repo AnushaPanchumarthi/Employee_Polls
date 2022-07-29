@@ -29,8 +29,7 @@ const QuestionPage = (props) => {
                     optedAnswer === 'optionOne' ? 'bg-success' : 'bg-dark'
                   }`}
                   role="progressbar"
-                  style={{ width: `${optionOneprcntg}%` }}
-                >
+                  style={{ width: `${optionOneprcntg}%` }}>
                   {optionOneprcntg}%
                 </div>
               </div>
@@ -59,7 +58,7 @@ const QuestionPage = (props) => {
             </div>
           </div>
           {!optedAnswer && (
-            <Link to={`/questions/${questionId}`}>Answer Poll</Link>
+            <Link to={`/questions/${questionId}`}>Vote Now </Link>
           )}
         </div>
       </div>

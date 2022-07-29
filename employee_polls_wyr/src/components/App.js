@@ -8,6 +8,7 @@ import PollDetail from './PollDetail';
 import NewPoll from './NewPoll';
 import Navbar from './PageLayout/Navbar';
 import LeaderBoard from './LeaderBoard';
+import NotFound from './NotFound';
 import { Routes, Route } from 'react-router-dom';
 
 const App = (props) => {
@@ -16,26 +17,22 @@ const App = (props) => {
   }, []);
 
   const { authedUser } = props;
+  console.log('IAM HERE IN APP', authedUser);
+
   return (
     <Fragment>
       <LoadingBar />
-      {authedUser === null ? (
-        <LoginPage />
-      ) : (
-        <>
-          <Navbar authedUser={authedUser} />
+      <Navbar authedUser={authedUser} />
           <div className="container">
-            <Routes>
-              <Route exact path="/home" element={<Dashboard />} />
-              <Route exact path="/login" element={<LoginPage />} />
-              <Route path="/addNewPoll" element={<NewPoll />} />
+           <Routes>
+              <Route exact path="/" element={<Dashboard />} />
+              <Route path="/login" element={<LoginPage />} />
+              <Route path="/add" element={<NewPoll />} />
               <Route path="/questions/:question_id" element={<PollDetail />} />
-              <Route exact path="/leaderboard" element={<LeaderBoard />} />
-              <Route path="*" element={<notFound />} />
+              <Route path="/leaderboard" element={<LeaderBoard />} />
+              <Route path="/404" element={<NotFound />} />
             </Routes>
           </div>
-        </>
-      )}
     </Fragment>
   );
 };

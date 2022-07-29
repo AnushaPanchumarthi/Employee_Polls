@@ -39,7 +39,9 @@ Object {
               <h2
                 style="color: red; font-size: 20px;"
               >
-                 Would you Rather!! 
+                 
+                Would you Rather!!
+                 
               </h2>
               <form>
                 <div
@@ -48,7 +50,9 @@ Object {
                   <label
                     style="display: block; font-size: 20px;"
                   >
-                     Select The User from the list 
+                     
+                    Select The User from the list
+                     
                   </label>
                   <select
                     data-testid="username-select"
@@ -67,7 +71,6 @@ Object {
                 <button
                   class="btn  btn-dark px-4 my-2"
                   data-testid="submit-button"
-                  disabled=""
                   type="submit"
                 >
                   Login
@@ -114,7 +117,9 @@ Object {
             <h2
               style="color: red; font-size: 20px;"
             >
-               Would you Rather!! 
+               
+              Would you Rather!!
+               
             </h2>
             <form>
               <div
@@ -123,7 +128,9 @@ Object {
                 <label
                   style="display: block; font-size: 20px;"
                 >
-                   Select The User from the list 
+                   
+                  Select The User from the list
+                   
                 </label>
                 <select
                   data-testid="username-select"
@@ -142,7 +149,6 @@ Object {
               <button
                 class="btn  btn-dark px-4 my-2"
                 data-testid="submit-button"
-                disabled=""
                 type="submit"
               >
                 Login

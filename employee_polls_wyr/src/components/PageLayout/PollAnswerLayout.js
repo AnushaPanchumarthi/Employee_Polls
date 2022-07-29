@@ -1,14 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { handleAnswerQuestion } from '../../actions/questions';
-import { useNavigate } from 'react-router-dom';
+import { Navigate, useLocation, useNavigate } from 'react-router-dom';
+import PollCard from './PollCard';
 
 const PollAnswerLayout = (props) => {
   const navigate = useNavigate();
-  let checkedOption;
+  const location = useLocation();
+  const [redirect, setredirect] = useState(false);
+  const [checkedOption,setcheckedOption] = useState('');
 
+  console.log('PROPS QUESTION', props);
   const handleChange = (e) => {
-    checkedOption = e.target.value;
+    setcheckedOption(e.target.value);
   };
 
   const handleSubmit = (e) => {
@@ -17,46 +21,49 @@ const PollAnswerLayout = (props) => {
       alert('Please choose one of the options!');
       return;
     }
-
     const answerObj = {
       authedUser: props.authedUser,
       qid: props.questionId,
       answer: checkedOption
     };
     props.dispatch(handleAnswerQuestion(answerObj));
-    checkedOption = '';
-    navigate('/home');
+    setcheckedOption('');
+    setredirect(true);
+    console.log('AFTER RENDING THE PROPS', props);
   };
 
   if (props.loaded !== true) {
     return <p className="text-center">Loading...</p>;
   }
-  if (
-    props.loaded === true &&
-    (props.question === undefined || props.question === null)
-  ) {
-    return navigate('/notfound');
+  if(props.loaded === true && (props.authedUser === null || props.authedUser === undefined)) {
+    console.log('AMI INTO REDIRECT PATH' , location.pathname);
+    return <Navigate to=  "/login" replace  state={{ path: location.pathname }} />
   }
-  if (
-    props.loaded === true &&
-    (props.authedUser === null || props.authedUser === undefined)
-  ) {
-    return navigate('/login');
+ if(props.loaded === true && (props.question === undefined || props.question === null)){
+        console.log('AM I INTO LOADED 404 PATH');
+    return navigate("/404");
+  }
+  if(redirect === true){
+        return navigate('/');
   }
 
   const question = props.question;
   const username = props.username;
   const userAvatar = props.userAvatar;
-
+  const optedAnswer = props.optedAnswer;
   const optionOneVotes = question.optionOne.votes.length;
   const optionTwoVotes = question.optionTwo.votes.length;
   const summation = optionOneVotes + optionTwoVotes;
   const optionOneprcntg =
     summation === 0 ? 0 : Math.floor((optionOneVotes * 100) / summation);
   const optionTwoprcntg =
-    summation === 0 ? 0 : Math.floor((optionTwoVotes * 100) / summation);
+    summation === 0 ? 0 : Math.floor((optionTwoVotes * 100) / summation); 
 
   return (
+    <div>
+    {optedAnswer ? (
+      <PollCard questionId={props.questionId} optedAnswer={optedAnswer}/>
+  ) : (
     <div className="card w-75 mx-auto mt-3">
       <h6 className="card-header py-3 px-4">
         {username} Poll for Would You Rather:{' '}
@@ -132,27 +139,33 @@ const PollAnswerLayout = (props) => {
               className="btn btn-success mt-4"
               data-testid="submit-button"
               type="submit"
-              disabled={checkedOption === null}
-            >
+              disabled={checkedOption === null}>
               Submit
             </button>
           </form>
         </div>
       </div>
     </div>
+  )}
+  </div>                 
   );
 };
 
-const mapStateToProps = ({ questions, authedUser, users }, { questionId }) => {
+
+
+const mapStateToProps = ({ questions, authedUser, users }, { type, questionId }) => {
   const question = questions[questionId];
   const username = question ? users[question.author].name : '';
   const userAvatar = question ? users[question.author].avatarURL : '';
+  const authedUserDetails = users[authedUser];
+  const optedAnswer = authedUser === null ? null : authedUserDetails.answers[questionId];
   return {
     loaded: true,
     question,
     username,
     authedUser,
-    userAvatar
+    userAvatar,
+    optedAnswer: optedAnswer
   };
 };
 

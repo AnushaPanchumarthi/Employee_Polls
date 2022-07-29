@@ -3,14 +3,15 @@ import { connect } from 'react-redux';
 import { useRef } from 'react';
 import { setAuthedUser } from '../actions/authedUser';
 import Illustration from '../images/WYR.jpg';
-import { useNavigate } from 'react-router-dom';
+import {  useLocation, useNavigate } from 'react-router-dom';
 
 const LoginPage = (props) => {
   const navigate = useNavigate();
+  const { state } = useLocation();
   const dispatch = props.dispatch;
   const userIds = props.users;
   const inputRef = useRef();
-  const [selectedUser, setSelectedUser] = useState('');
+  const [selectedUser, setSelectedUser] = useState(userIds[0]);
 
   const changeUser = (e) => {
     setSelectedUser(inputRef.current.value);
@@ -18,8 +19,8 @@ const LoginPage = (props) => {
   const handleLogin = (e) => {
     e.preventDefault();
     dispatch(setAuthedUser(inputRef.current.value));
-    if (selectedUser) {
-      navigate('/home');
+    if (inputRef.current.value) {
+      return navigate(state?.path || "/",{'replace': false});
     }
   };
   return (
@@ -59,7 +60,6 @@ const LoginPage = (props) => {
                   name="Username"
                   data-testid="username-select"
                   onChange={changeUser}
-                  defaultValue={selectedUser}
                   ref={inputRef}
                   required
                 >
@@ -76,9 +76,7 @@ const LoginPage = (props) => {
               <button
                 className="btn  btn-dark px-4 my-2"
                 type="submit"
-                data-testid="submit-button"
-                disabled={selectedUser === ''}
-              >
+                data-testid="submit-button" >
                 Login
               </button>
             </form>

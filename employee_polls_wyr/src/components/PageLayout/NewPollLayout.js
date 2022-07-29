@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { Navigate, useNavigate ,useLocation} from 'react-router-dom';
 import { handleCreateQuestion } from '../../actions/questions';
 
 const NewPollLayout = (props) => {
+  console.log('NEW POLL...', props)
   const navigate = useNavigate();
+  const location = useLocation();
   const [optionOneText, setOptionOneText] = useState('');
   const [optionTwoText, setoptionTwoText] = useState('');
+  const [ redirect , setredirect ] = useState(false);
 
   const handleOptionOneChange = (e) => {
     setOptionOneText(e.target.value);
@@ -24,8 +27,19 @@ const NewPollLayout = (props) => {
     props.dispatch(handleCreateQuestion(newPoll));
     setOptionOneText('');
     setoptionTwoText('');
-    navigate('/home');
+    setredirect(true);
   };
+  
+  if(props.loaded === undefined){
+    return <p>Loading...</p>
+  }
+  if(props.loaded === true && (props.authedUser === null || props.authedUser === undefined )){
+    console.log('I am satisfied with not found', location.pathname);
+    return  <Navigate to="/login" replace state={{ path: '/404' }} />
+  }
+  if( redirect === true){
+    return  navigate('/');
+  }
 
   return (
     <form onSubmit={handleSubmit} className="w-75 bg-light px-4 py-4">
@@ -66,8 +80,7 @@ const NewPollLayout = (props) => {
         <button
           className="btn btn-dark mt-4"
           disabled={optionOneText === undefined && optionTwoText === undefined}
-          type="submit"
-        >
+          type="submit">
           Submit
         </button>
       </div>

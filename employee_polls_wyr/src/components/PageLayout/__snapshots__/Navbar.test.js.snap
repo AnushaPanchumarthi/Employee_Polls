@@ -20,12 +20,9 @@ Object {
           <div
             class="collapse navbar-collapse"
           >
-            <a
-              class="navigation"
-              href="/login"
-            >
-              Login
-            </a>
+            <p>
+              Loading...
+            </p>
           </div>
         </div>
       </nav>
@@ -46,12 +43,9 @@ Object {
         <div
           class="collapse navbar-collapse"
         >
-          <a
-            class="navigation"
-            href="/login"
-          >
-            Login
-          </a>
+          <p>
+            Loading...
+          </p>
         </div>
       </div>
     </nav>

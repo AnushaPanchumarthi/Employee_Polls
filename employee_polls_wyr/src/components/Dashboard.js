@@ -1,14 +1,14 @@
 import { connect } from 'react-redux';
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 import QuestionsLayout from './PageLayout/QuestionsLayout';
 
 const Dashboard = (props) => {
-  const navigate = useNavigate();
+  console.log('IAM into Dashbord page');
   if (props.loaded === undefined) {
     return <p className="text-center mt-4">Loading...</p>;
   } else if (props.authedUser === null) {
-    navigate('/login');
+    return <Navigate to="/login" />;
   } else {
     const { questionIds } = props;
     const answered = props.answeredIds;

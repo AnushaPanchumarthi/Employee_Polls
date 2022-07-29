@@ -1,18 +1,13 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { connect } from 'react-redux';
-import { resetAuthedUSer } from '../../actions/authedUser';
 
-function LogoutLayout(props) {
-  const handleLogout = (e) => {
-    e.preventDefault();
-    props.dispatch(resetAuthedUSer());
-  };
+function LogoutLayout() {
+  console.log('IAM IN LOGOUT');
   return (
-    <NavLink className="nav-link ml-auto" to="/login" onClick={handleLogout}>
-      Logout
-    </NavLink>
+    <div className="navbar-nav ml-auto">
+    <NavLink className="nav-link mx-3" to="/login" >Login</NavLink>
+   </div>
   );
 }
 
-export default connect()(LogoutLayout);
+export default (LogoutLayout);

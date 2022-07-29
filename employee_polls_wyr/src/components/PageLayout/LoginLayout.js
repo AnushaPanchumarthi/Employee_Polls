@@ -1,26 +1,40 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
-
-import LogoutLayout from './LogoutLayout';
+import { useParams } from 'react-router-dom';
 import UserLayout from './UserLayout';
+import { resetAuthedUSer } from '../../actions/authedUser';
+
+const withRouter = (Component) => {
+  const ComponentWithRouterProp = (props) => {
+    let params = useParams();
+    return <Component {...props} router={{ params }} />;
+  };
+  return ComponentWithRouterProp;
+};
 
 const LoginLayout = (props) => {
+  console.log('IAM IN LOGIN LAYOUT', props.authedUSer);
+  const handleLogout = (e) => {
+    e.preventDefault();
+    props.dispatch(resetAuthedUSer());
+  };
+
   return (
     <div className="navbar-nav ml-auto">
-      <NavLink className="nav-link ml-auto" exact to="/home">
+      <NavLink className="nav-link mx-3" to="/">
         Home
       </NavLink>
-      <NavLink className="nav-link ml-auto" to="/addNewPoll">
+      <NavLink className="nav-link mx-3" to="/add">
         New Poll
       </NavLink>
-      <NavLink className="nav-link ml-auto" to="/leaderboard">
+      <NavLink className="nav-link mx-3" to="/leaderboard">
         LeaderBoard
       </NavLink>
       <UserLayout />
-      <LogoutLayout />
+      <button className="btn nav-link mx-3" style={{position: 'relative', bottom:1}} onClick={handleLogout}>Logout</button>
     </div>
   );
 };
 
-export default connect()(LoginLayout);
+export default withRouter(connect()(LoginLayout))
