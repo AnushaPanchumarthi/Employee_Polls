@@ -19,7 +19,7 @@ const LoginPage = (props) => {
   const handleLogin = (e) => {
     e.preventDefault();
     dispatch(setAuthedUser(inputRef.current.value));
-    if (inputRef.current.value) {
+    if (inputRef.current.value || selectedUser) {
       return navigate(state?.path || "/",{'replace': false});
     }
   };
