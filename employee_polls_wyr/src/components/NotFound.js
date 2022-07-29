@@ -7,8 +7,7 @@ function NotFound() {
       <div className="container h-100 d-flex flex-column align-items-center justify-content-center">
         <h1
           className="display-1 mt-5"
-          style={{ fontSize: 204, fontWeight: 'bolder', color: '#D7DBDF' }}
-        >
+          style={{ fontSize: 204, fontWeight: 'bolder', color: '#D7DBDF' }} >
           404
         </h1>
         <h1 className="mt-2 font-weight-bold">Page not found!</h1>
