@@ -10,8 +10,7 @@ const withRouter = (Component) => {
 };
 
 const PollDetail = (props) => {
-  console.log('POLL DETAIL PROPS..',props);
-  return (
+ return (
     <section className="py-5">
       <div className="container mt-4">
         <h3>Answer Poll</h3>
