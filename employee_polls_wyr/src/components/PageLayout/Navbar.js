@@ -3,7 +3,6 @@ import LoginLayout from './LoginLayout';
 import LogoutLayout from './LogoutLayout';
 
 function Navbar(props) {
-  console.log('ENTER INTO NAVBAR,', props);
   return (
     <nav className="navbar navbar-expand navbar-dark bg-dark">
       <div className="container">

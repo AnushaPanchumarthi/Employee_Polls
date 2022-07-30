@@ -1,11 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 const PollCard = (props) => {
   const { question,optedAnswer } = props;
-
-    console.log('opted Anwer.. in the poll', optedAnswer);
-
     const optionOneVotes = question.optionOne.votes.length;
     const optionTwoVotes = question.optionTwo.votes.length;
     const summation = optionOneVotes + optionTwoVotes;
@@ -52,6 +50,9 @@ const PollCard = (props) => {
                 </span>
               </div>
             </div> 
+            <Link to="/" className="mt-4 btn btn-dark px-4 py-2">
+          Back to Home
+        </Link>
     </div>
     );
 }

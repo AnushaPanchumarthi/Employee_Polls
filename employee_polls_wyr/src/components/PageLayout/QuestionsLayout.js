@@ -45,7 +45,7 @@ const QuestionsLayout = (props) => {
           {unAnswered.length === 0 && (
             <p>
               Hurray! There are no Unanswered Polls as of now.Why not a Create a
-              Poll Now! ?<Link to="/addNewPoll">New Poll</Link>
+              Poll Now! ?<Link to="/add">New Poll</Link>
             </p>
           )}
           {unAnswered.map((q) => (

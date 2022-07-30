@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 import UserLayout from './UserLayout';
 import { resetAuthedUSer } from '../../actions/authedUser';
@@ -14,10 +14,12 @@ const withRouter = (Component) => {
 };
 
 const LoginLayout = (props) => {
-  console.log('IAM IN LOGIN LAYOUT', props.authedUSer);
+  
+  const navigate = useNavigate();
   const handleLogout = (e) => {
     e.preventDefault();
     props.dispatch(resetAuthedUSer());
+    navigate('/login');
   };
 
   return (

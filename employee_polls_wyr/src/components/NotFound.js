@@ -12,7 +12,7 @@ function NotFound() {
         </h1>
         <h1 className="mt-2 font-weight-bold">Page not found!</h1>
         <p className="lead mt-2">Unable to find the Page.</p>
-        <Link to="/home" className="mt-4 btn btn-dark px-4 py-2">
+        <Link to="/" className="mt-4 btn btn-dark px-4 py-2">
           Back to Home
         </Link>
       </div>

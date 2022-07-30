@@ -4,7 +4,6 @@ import { Navigate, useNavigate ,useLocation} from 'react-router-dom';
 import { handleCreateQuestion } from '../../actions/questions';
 
 const NewPollLayout = (props) => {
-  console.log('NEW POLL...', props)
   const navigate = useNavigate();
   const location = useLocation();
   const [optionOneText, setOptionOneText] = useState('');

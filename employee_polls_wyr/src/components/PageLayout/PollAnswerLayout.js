@@ -1,16 +1,15 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { handleAnswerQuestion } from '../../actions/questions';
-import { Navigate, useLocation, useNavigate } from 'react-router-dom';
+import { Navigate, useLocation } from 'react-router-dom';
 import PollCard from './PollCard';
 
 const PollAnswerLayout = (props) => {
-  const navigate = useNavigate();
+  //const navigate = useNavigate();
   const location = useLocation();
   const [redirect, setredirect] = useState(false);
   const [checkedOption,setcheckedOption] = useState('');
 
-  console.log('PROPS QUESTION', props);
   const handleChange = (e) => {
     setcheckedOption(e.target.value);
   };
@@ -21,7 +20,7 @@ const PollAnswerLayout = (props) => {
       alert('Please choose one of the options!');
       return;
     }
-    const answerObj = {
+        const answerObj = {
       authedUser: props.authedUser,
       qid: props.questionId,
       answer: checkedOption
@@ -29,28 +28,28 @@ const PollAnswerLayout = (props) => {
     props.dispatch(handleAnswerQuestion(answerObj));
     setcheckedOption('');
     setredirect(true);
-    console.log('AFTER RENDING THE PROPS', props);
   };
-
-  if (props.loaded !== true) {
-    return <p className="text-center">Loading...</p>;
-  }
-  if(props.loaded === true && (props.authedUser === null || props.authedUser === undefined)) {
-    console.log('AMI INTO REDIRECT PATH' , location.pathname);
-    return <Navigate to=  "/login" replace  state={{ path: location.pathname }} />
-  }
- if(props.loaded === true && (props.question === undefined || props.question === null)){
-        console.log('AM I INTO LOADED 404 PATH');
-    return navigate("/404");
-  }
-  if(redirect === true){
-        return navigate('/');
-  }
 
   const question = props.question;
   const username = props.username;
   const userAvatar = props.userAvatar;
   const optedAnswer = props.optedAnswer;
+
+  if (props.loaded !== true) {
+    return <p className="text-center">Loading...</p>;
+  }
+  if(props.loaded === true && (props.authedUser === null || props.authedUser === undefined)) {
+    return <Navigate to=  "/login" replace  state={{ path: location.pathname }} />
+  }
+ if(props.loaded === true && (props.question === undefined || props.question === null)){
+  console.log('IAM IN NOT FOUND');
+  return  <Navigate to="/404" />
+  }
+  if(redirect === true){
+    // return navigate('/');
+    return <PollCard questionId={props.questionId} optedAnswer={optedAnswer}/>
+  }
+
   const optionOneVotes = question.optionOne.votes.length;
   const optionTwoVotes = question.optionTwo.votes.length;
   const summation = optionOneVotes + optionTwoVotes;
